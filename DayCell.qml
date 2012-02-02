@@ -1,5 +1,4 @@
 import QtQuick 1.1
-import com.nokia.meego 1.0
 
 /*
 Copyright (c) 2011-2012, Vasiliy Sorokin <sorokin.vasiliy@gmail.com>
@@ -75,7 +74,7 @@ Item {
         anchors.centerIn: parent
 
         source: dayCell.background()
-        Label {
+        Text {
             id: label
             anchors.centerIn: parent
             font.pixelSize: dayCell.platformStyle.dayFontSize

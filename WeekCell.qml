@@ -1,5 +1,4 @@
 import QtQuick 1.1
-import com.nokia.meego 1.0
 
 /*
 Copyright (c) 2011-2012, Vasiliy Sorokin <sorokin.vasiliy@gmail.com>
@@ -36,7 +35,7 @@ Item {
     height: label.height
     width: parent.width / 7
 
-    Label {
+    Text {
         id: label
         anchors.centerIn: parent
         font.pixelSize: weekCell.platformStyle.dayNameFontSize
