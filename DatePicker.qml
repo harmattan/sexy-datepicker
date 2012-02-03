@@ -53,15 +53,7 @@ Usage:
 Item {
     id: root
 
-    property QtObject platformStyle: DatePickerStyle {}
-
-    QtObject {
-        id: privateData
-
-        property int day: 1
-        property int month: 1
-        property int year: 2011
-    }
+    property DatePickerStyle platformStyle: DatePickerStyle {}
 
     signal selectedDateChanged(date selectedDate)
 
@@ -228,26 +220,33 @@ Item {
 
                 WeekCell {
                     text: qsTr("Mon")
+                    platformStyle: datePicker.platformStyle
                 }
                 WeekCell {
                     text: qsTr("Tue")
+                    platformStyle: datePicker.platformStyle
                 }
                 WeekCell {
                     text: qsTr("Wed")
+                    platformStyle: datePicker.platformStyle
                 }
                 WeekCell {
                     text: qsTr("Thu")
+                    platformStyle: datePicker.platformStyle
                 }
                 WeekCell {
                     text: qsTr("Fri")
+                    platformStyle: datePicker.platformStyle
                 }
                 WeekCell {
                     isWeekEnd: true
                     text: qsTr("Sat")
+                    platformStyle: datePicker.platformStyle
                 }
                 WeekCell {
                     isWeekEnd: true
                     text: qsTr("Sun")
+                    platformStyle: datePicker.platformStyle
                 }
             }
 
@@ -266,6 +265,8 @@ Item {
                 interactive: false
 
                 delegate: DayCell {
+                    platformStyle: datePicker.platformStyle
+
                     width: daysGrid.cellWidth;
                     height: daysGrid.cellHeight
 
