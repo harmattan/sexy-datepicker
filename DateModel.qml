@@ -43,7 +43,7 @@ ListModel {
     }
 
     function getMonthYearString() {
-        return "" + getMonthString() + " " + selectedDate.getFullYear()
+        return Qt.formatDate(selectedDate, "MMMM yyyy")
     }
 
     function changeModel(_selectedDate) {
@@ -81,35 +81,6 @@ ListModel {
     }
 
     //private:
-    function getMonthString() {
-        switch (selectedDate.getMonth()) {
-        case 0:
-            return qsTr("January")
-        case 1:
-            return qsTr("February")
-        case 2:
-            return qsTr("March")
-        case 3:
-            return qsTr("April")
-        case 4:
-            return qsTr("May")
-        case 5:
-            return qsTr("June")
-        case 6:
-            return qsTr("July")
-        case 7:
-            return qsTr("August")
-        case 8:
-            return qsTr("September")
-        case 9:
-            return qsTr("October")
-        case 10:
-            return qsTr("November")
-        case 11:
-            return qsTr("December")
-        }
-    }
-
     function fillModel() {
         for(var i = 0; i < 6 * 7; ++i) {
             var objectDate = selectedDate;
