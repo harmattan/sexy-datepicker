@@ -63,21 +63,11 @@ ListModel {
     }
 
     function showNext() {
-        var newDate = selectedDate
-        var currentDay = selectedDate.getDate()
-        var nextMonth = selectedDate.getMonth() + 1
-        currentDay = getValidDayByMonthAndDay(nextMonth, currentDay, isLeapYear(selectedDate.getFullYear()));
-        newDate.setMonth(nextMonth, currentDay)
-        changeModel(newDate)
+        showOtherMonth(selectedDate.getMonth() + 1)
     }
 
     function showPrevious() {
-        var newDate = selectedDate
-        var currentDay = selectedDate.getDate()
-        var previousMonth = selectedDate.getMonth() - 1
-        currentDay = getValidDayByMonthAndDay(previousMonth, currentDay, isLeapYear(selectedDate.getFullYear()));
-        newDate.setMonth(previousMonth, currentDay)
-        changeModel(newDate)
+        showOtherMonth(selectedDate.getMonth() - 1)
     }
 
     //private:
@@ -99,6 +89,14 @@ ListModel {
                    "isOtherMonthDay" : dateOfDay.getMonth() !== selectedDate.getMonth(),
                    "hasEventDay" : false
                })
+    }
+
+    function showOtherMonth(month) {
+        var newDate = selectedDate
+        var currentDay = selectedDate.getDate()
+        currentDay = getValidDayByMonthAndDay(month, currentDay, isLeapYear(selectedDate.getFullYear()));
+        newDate.setMonth(month, currentDay)
+        changeModel(newDate)
     }
 
     function getValidDayByMonthAndDay(month, day, leapYear) {
