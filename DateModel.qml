@@ -49,14 +49,6 @@ ListModel {
     function changeModel(_selectedDate) {
         clear()
         selectedDate = _selectedDate
-        var tmpDate = selectedDate
-        tmpDate.setDate(selectedDate.getDate() - (selectedDate.getDate() - 1))
-        var firstDayWeekDay = tmpDate.getDay()
-        if (firstDayWeekDay === 0)
-            firstDayWeekDay = 6
-        else
-            firstDayWeekDay--
-        firstDayOffset = firstDayWeekDay
 
         fillModel()
         monthChanged()
@@ -72,6 +64,7 @@ ListModel {
 
     //private:
     function fillModel() {
+        firstDayOffset = getFirstDayOffset(selectedDate)
         for(var i = 0; i < 6 * 7; ++i) {
             var objectDate = selectedDate;
             objectDate.setDate(selectedDate.getDate() - (selectedDate.getDate() - 1 + firstDayOffset - i))
@@ -99,43 +92,50 @@ ListModel {
         changeModel(newDate)
     }
 
+    function getFirstDayOffset(currentDate) {
+        var tmpDate = currentDate
+        tmpDate.setDate(currentDate.getDate() - (currentDate.getDate() - 1))
+        var firstDayWeekDay = tmpDate.getDay()
+        if (firstDayWeekDay === 0)
+            firstDayWeekDay = 6
+        else
+            firstDayWeekDay--
+        return firstDayWeekDay
+    }
+
     function getValidDayByMonthAndDay(month, day, leapYear) {
         if (month === 12)
             month = 0
         if (month === -1)
             month = 11
 
-        if (day <= 29 && month !== 1)
+        if (month === 0 ||
+                month === 2 ||
+                month === 4 ||
+                month === 6 ||
+                month === 7 ||
+                month === 9 ||
+                month === 11)
             return day
-        if (month === 1) {
-            if (leapYear) {
-                if (day > 29)
-                    return 29
+
+        if (month !== 1) {
+            if (day < 31)
                 return day
-            }
-            else {
-                if (day > 28)
-                    return 28
-                return day
-            }
+            return 30
         }
 
-        if (day === 31 && (month === 0 ||
-                           month === 2 ||
-                           month === 4 ||
-                           month === 6 ||
-                           month === 7 ||
-                           month === 9 ||
-                           month === 11))
+        if (day < 29)
             return day
-        else
-            return 30
+
+        if (leapYear)
+            return 29
+        return 28
     }
 
     function isLeapYear(year) {
-        if(year%4 === 0) {
-            if(year%100 === 0) {
-                if(year%400 === 0) {
+        if(year % 4 === 0) {
+            if(year % 100 === 0) {
+                if(year % 400 === 0) {
                     return true;
                 }
                 else
